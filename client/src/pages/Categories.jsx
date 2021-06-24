@@ -74,7 +74,7 @@ function Categories() {
 	return (
 		<div className="mt-4 custom-navbar">
 			<Confirmations title={`${state.restore ? "Restore" : "Delete"}`} message={`${state.restore ? `Are you sure to restore ${state.confirmation.message}?` : `Are you sure to delete ${state.confirmation.message}?`}`} actions={state.restore ? restoreConfirmation : deleteHandler} />
-			<AddData title="cabang" type={state.type} actions={state.type === "add" ? addCategoryHandle : editCategoryHandle} cancelAction={cancelHandler}>
+			<AddData title="Category" type={state.type} actions={state.type === "add" ? addCategoryHandle : editCategoryHandle} cancelAction={cancelHandler}>
 				<div className="form-group">
 					<label className="h6" htmlFor="categoryName">
 						Category's Name
