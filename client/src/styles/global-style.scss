@@ -1,0 +1,248 @@
+$primary: #192a56;
+$secondary: #fbc531;
+$third: #f5f6fa;
+$fourth: #334ead;
+$success: #44bd32;
+$danger: #e84118;
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap");
+
+* {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+
+.custom-body {
+	background-color: $third;
+}
+
+.bg-primer {
+	background-color: $primary;
+	color: $third;
+}
+.bg-second {
+	background-color: $secondary;
+	color: $third;
+}
+.bg-third {
+	background-color: $fourth;
+	color: $third;
+}
+
+.hover-primary {
+	transition: 0.3s;
+	&:hover {
+		background-color: $primary;
+		color: $third;
+	}
+}
+
+// --------------------------- Start --------------------- //
+
+.home-container {
+	display: grid;
+	place-content: center center;
+	.wrapper {
+		display: grid;
+		grid-template-areas: "main-picture login-side";
+		grid-template-columns: 3fr 1fr;
+		.main-picture {
+			grid-area: main-picture;
+			display: grid;
+			place-content: center center;
+			width: 100%;
+			.main-image {
+				border-radius: 10px;
+				width: 90%;
+				margin: auto;
+			}
+		}
+		.login-side {
+			grid-area: login-side;
+			display: grid;
+			place-content: center center;
+			grid-template-columns: 100%;
+			.main-item {
+				width: 100%;
+			}
+		}
+	}
+}
+.actions {
+	display: grid;
+	grid-template-areas: "custom-search form-switch register-new";
+	.custom-search {
+		grid-area: custom-search;
+	}
+	.form-switch {
+		align-self: center;
+		grid-area: form-switch;
+		.switch {
+			position: relative;
+			display: inline-block;
+			width: 36px;
+			height: 20px;
+		}
+
+		.switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: -2px;
+			bottom: 0;
+			background-color: #ccc;
+			-webkit-transition: 0.4s;
+			transition: 0.4s;
+		}
+
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 12px;
+			width: 12px;
+			left: 0px;
+			right: 10px;
+			bottom: 4px;
+			background-color: white;
+			-webkit-transition: 0.4s;
+			transition: 0.4s;
+		}
+
+		input:checked + .slider {
+			background-color: #2196f3;
+		}
+
+		input:focus + .slider {
+			box-shadow: 0 0 1px #2196f3;
+		}
+
+		input:checked + .slider:before {
+			-webkit-transform: translateX(26px);
+			-ms-transform: translateX(26px);
+			transform: translateX(26px);
+		}
+
+		/* Rounded sliders */
+		.slider.round {
+			border-radius: 20px;
+		}
+
+		.slider.round:before {
+			border-radius: 50%;
+		}
+	}
+	.register-new {
+		grid-area: register-new;
+	}
+}
+.action-button {
+	display: inline;
+}
+.karyawan-action {
+	flex-direction: row;
+	.item-ml-2 {
+		margin-left: 3px;
+	}
+}
+
+.item-container {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	.each-item {
+		width: 20%;
+		min-width: 200px;
+		min-height: 350px;
+		border-radius: 5px;
+		border: #a09d9d solid 1px;
+		display: block;
+		overflow: hidden;
+
+		.image-item {
+			width: 100%;
+			height: 65%;
+			object-fit: cover;
+		}
+		.detail-item {
+			text-align: center;
+			display: block;
+		}
+	}
+	.each-item:hover {
+		border: solid rgb(235, 72, 72) 2px;
+	}
+}
+
+.cart-container {
+	width: 100%;
+	.wrapper {
+		display: flex;
+		.main-cart {
+			flex: 2;
+			display: flex;
+			flex-direction: column;
+			justify-content: start;
+			.cart-item {
+				border-radius: 10px;
+				width: 95%;
+				height: 10%;
+				min-height: 150px;
+				border: #a09d9d solid 1px;
+				display: flex;
+				padding: 10px;
+				.cart-image {
+					height: 100%;
+					max-width: 140px;
+					overflow: hidden;
+					border-radius: 5px;
+					.image {
+						object-fit: cover;
+						height: 100%;
+						width: 100%;
+					}
+				}
+				.detil-item {
+					width: 100%;
+					padding-left: 5px;
+					padding-right: 5px;
+				}
+				.delete{
+					width: 50px;
+				}
+			}
+		}
+		.checkout-side {
+			flex: 1;
+			display: flex;
+			.main-item {
+				width: 100%;
+				.checkout-item {
+					border-radius: 10px;
+					border: #a09d9d solid 1px;
+					height: 150px;
+					display: flex;
+					flex-direction: column;
+					.total-bayar {
+						flex: 3;
+						font-weight: 700;
+						color: $success;
+					}
+					.btn-primer {
+						flex: 1;
+						background-color: $secondary;
+					}
+				}
+			}
+		}
+	}
+}

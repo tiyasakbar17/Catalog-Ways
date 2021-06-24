@@ -1,0 +1,44 @@
+{
+	"name": "catalog-site",
+	"version": "1.0.0",
+	"description": "this is a website created for passing the Astra test",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"client": "npm start --prefix client",
+		"server": "nodemon index",
+		"local-build": "npm install && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && cd client && npm install",
+		"dev": "concurrently \"npm run server\" \"npm run client\" ",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+		"create": "npx sequelize-cli db:create",
+		"migrate": "npx sequelize-cli db:migrate",
+		"seed": "npx sequelize-cli db:seed:all"
+	},
+	"keywords": [
+		"astra",
+		"server",
+		"nodejs",
+		"expressjs"
+	],
+	"author": "Muhammad Tiyas Fachreza Akbar",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.0.0",
+		"cloudinary": "^1.26.1",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"joi": "^17.4.0",
+		"jsonwebtoken": "^8.5.1",
+		"multer": "^1.4.2",
+		"mysql2": "^2.2.5",
+		"nodemailer": "^6.6.2",
+		"pg": "^8.6.0",
+		"sequelize": "^6.6.2",
+		"sequelize-cli": "^6.2.0",
+		"streamifier": "^0.1.1"
+	},
+	"devDependencies": {
+		"concurrently": "^6.2.0"
+	}
+}
