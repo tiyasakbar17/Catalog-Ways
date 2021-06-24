@@ -1,5 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { userRegister } from "../../redux/actions/Auth";
 
 function Register({ onClick,  }) {
 	const innitialValue = {
@@ -9,6 +10,7 @@ function Register({ onClick,  }) {
 	};
 
 	const [state, setState] = React.useState(innitialValue);
+	const dispatch = useDispatch()
 
 	const changeHandler = (e) => {
 		setState((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
@@ -16,6 +18,7 @@ function Register({ onClick,  }) {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
+		dispatch(userRegister(state))
 		onClick();
 	};
 
