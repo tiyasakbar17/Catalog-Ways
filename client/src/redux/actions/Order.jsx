@@ -19,12 +19,20 @@ export const makeOrder = () => async (dispatch) => {
 		dispatch(showLoading());
 		const results = await Axios.post(`/api/v1/order/add`, configJson);
 		dispatch(showPopUp(results.data.message));
-		dispatch(loadData())
+		dispatch(loadData());
 		dispatch(closeLoading());
 		return true;
 	} catch (error) {
 		dispatch(closeLoading());
-		dispatch(showPopUp(error.response.data.message));
+		if (error.response.data.message == "Invalid Token") {
+			localStorage.removeItem("token");
+			dispatch({
+				type: "AUTH_ERROR",
+			});
+			dispatch(showPopUp("Login Expired"));
+		} else {
+			dispatch(showPopUp(error.response.data.message));
+		}
 		return false;
 	}
 };
@@ -43,7 +51,15 @@ export const getOrder =
 			return true;
 		} catch (error) {
 			dispatch(closeLoading());
-			dispatch(showPopUp(error.response.data.message));
+			if (error.response.data.message == "Invalid Token") {
+				localStorage.removeItem("token");
+				dispatch({
+					type: "AUTH_ERROR",
+				});
+				dispatch(showPopUp("Login Expired"));
+			} else {
+				dispatch(showPopUp(error.response.data.message));
+			}
 			return false;
 		}
 	};
@@ -59,6 +75,14 @@ export const editOrder = (data) => async (dispatch) => {
 		dispatch(showPopUp(results.data.message));
 	} catch (error) {
 		dispatch(closeLoading());
-		dispatch(showPopUp(error.response.data.message));
+		if (error.response.data.message == "Invalid Token") {
+			localStorage.removeItem("token");
+			dispatch({
+				type: "AUTH_ERROR",
+			});
+			dispatch(showPopUp("Login Expired"));
+		} else {
+			dispatch(showPopUp(error.response.data.message));
+		}
 	}
 };

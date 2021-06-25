@@ -7,7 +7,6 @@ const configJson = {
 	},
 };
 
-
 const configForm = {
 	headers: {
 		"Content-Type": "multipart/form-data",
@@ -28,7 +27,15 @@ export const getItem =
 			return true;
 		} catch (error) {
 			dispatch(closeLoading());
-			dispatch(showPopUp(error.response.data.message));
+			if (error.response.data.message == "Invalid Token") {
+				localStorage.removeItem("token");
+				dispatch({
+					type: "AUTH_ERROR",
+				});
+				dispatch(showPopUp("Login Expired"));
+			} else {
+				dispatch(showPopUp(error.response.data.message));
+			}
 			return false;
 		}
 	};
@@ -43,7 +50,15 @@ export const deleteItem = (id, keyword) => async (dispatch, getState) => {
 		dispatch(closeLoading());
 	} catch (error) {
 		dispatch(closeLoading());
-		dispatch(showPopUp(error.response.data.message));
+		if (error.response.data.message == "Invalid Token") {
+			localStorage.removeItem("token");
+			dispatch({
+				type: "AUTH_ERROR",
+			});
+			dispatch(showPopUp("Login Expired"));
+		} else {
+			dispatch(showPopUp(error.response.data.message));
+		}
 	}
 };
 
@@ -57,7 +72,15 @@ export const restoreItem = (id, keyword) => async (dispatch, getState) => {
 		dispatch(closeLoading());
 	} catch (error) {
 		dispatch(closeLoading());
-		dispatch(showPopUp(error.response.data.message));
+		if (error.response.data.message == "Invalid Token") {
+			localStorage.removeItem("token");
+			dispatch({
+				type: "AUTH_ERROR",
+			});
+			dispatch(showPopUp("Login Expired"));
+		} else {
+			dispatch(showPopUp(error.response.data.message));
+		}
 	}
 };
 
@@ -69,7 +92,15 @@ export const addItem = (data) => async (dispatch) => {
 		dispatch(showPopUp(results.data.message));
 	} catch (error) {
 		dispatch(closeLoading());
-		dispatch(showPopUp(error.response.data.message));
+		if (error.response.data.message == "Invalid Token") {
+			localStorage.removeItem("token");
+			dispatch({
+				type: "AUTH_ERROR",
+			});
+			dispatch(showPopUp("Login Expired"));
+		} else {
+			dispatch(showPopUp(error.response.data.message));
+		}
 	}
 };
 
@@ -84,6 +115,14 @@ export const editItem = (data) => async (dispatch) => {
 		dispatch(showPopUp(results.data.message));
 	} catch (error) {
 		dispatch(closeLoading());
-		dispatch(showPopUp(error.response.data.message));
+		if (error.response.data.message == "Invalid Token") {
+			localStorage.removeItem("token");
+			dispatch({
+				type: "AUTH_ERROR",
+			});
+			dispatch(showPopUp("Login Expired"));
+		} else {
+			dispatch(showPopUp(error.response.data.message));
+		}
 	}
 };

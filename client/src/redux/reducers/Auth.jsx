@@ -23,6 +23,7 @@ const Auth = (state = innitialState, action) => {
 			localStorage.removeItem("token");
 			return {
 				...innitialState,
+				loading: false
 			};
 		case "AUTH_ERROR":
 			return {

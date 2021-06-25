@@ -24,6 +24,7 @@ export const loadData = () => async (dispatch) => {
 		dispatch(closeLoading());
 	} catch (error) {
 		dispatch(closeLoading());
+		localStorage.removeItem('token')
 		dispatch({
 			type: "AUTH_ERROR",
 		});

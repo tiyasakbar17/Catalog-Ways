@@ -12,8 +12,8 @@ export const getCategory =
 	async (dispatch) => {
 		try {
 			dispatch(showLoading());
-			const results = await Axios.get(`/api/v1/category/all?page=${page ? page : ''}&keyword=${keyword ? keyword : ''}&restore=${restore ? restore : ''}`, configJson);
-			
+			const results = await Axios.get(`/api/v1/category/all?page=${page ? page : ""}&keyword=${keyword ? keyword : ""}&restore=${restore ? restore : ""}`, configJson);
+
 			const { data } = results.data.data;
 			if (data === undefined) {
 				dispatch({
@@ -29,7 +29,15 @@ export const getCategory =
 			dispatch(closeLoading());
 		} catch (error) {
 			dispatch(closeLoading());
-			dispatch(showPopUp(error.response.data.message));
+			if (error.response.data.message == "Invalid Token") {
+				localStorage.removeItem("token");
+				dispatch({
+					type: "AUTH_ERROR",
+				});
+				dispatch(showPopUp("Login Expired"));
+			} else {
+				dispatch(showPopUp(error.response.data.message));
+			}
 		}
 	};
 
@@ -43,7 +51,15 @@ export const deleteCategory = (id, keyword) => async (dispatch, getState) => {
 		dispatch(closeLoading());
 	} catch (error) {
 		dispatch(closeLoading());
-		dispatch(showPopUp(error.response.data.message));
+		if (error.response.data.message == "Invalid Token") {
+			localStorage.removeItem("token");
+			dispatch({
+				type: "AUTH_ERROR",
+			});
+			dispatch(showPopUp("Login Expired"));
+		} else {
+			dispatch(showPopUp(error.response.data.message));
+		}
 	}
 };
 
@@ -57,7 +73,15 @@ export const restoreCategory = (id, keyword) => async (dispatch, getState) => {
 		dispatch(closeLoading());
 	} catch (error) {
 		dispatch(closeLoading());
-		dispatch(showPopUp(error.response.data.message));
+		if (error.response.data.message == "Invalid Token") {
+			localStorage.removeItem("token");
+			dispatch({
+				type: "AUTH_ERROR",
+			});
+			dispatch(showPopUp("Login Expired"));
+		} else {
+			dispatch(showPopUp(error.response.data.message));
+		}
 	}
 };
 
@@ -69,7 +93,15 @@ export const addCategory = (data) => async (dispatch) => {
 		dispatch(showPopUp(results.data.message));
 	} catch (error) {
 		dispatch(closeLoading());
-		dispatch(showPopUp(error.response.data.message));
+		if (error.response.data.message == "Invalid Token") {
+			localStorage.removeItem("token");
+			dispatch({
+				type: "AUTH_ERROR",
+			});
+			dispatch(showPopUp("Login Expired"));
+		} else {
+			dispatch(showPopUp(error.response.data.message));
+		}
 	}
 };
 
@@ -84,6 +116,14 @@ export const editCategory = (data) => async (dispatch) => {
 		dispatch(showPopUp(results.data.message));
 	} catch (error) {
 		dispatch(closeLoading());
-		dispatch(showPopUp(error.response.data.message));
+		if (error.response.data.message == "Invalid Token") {
+			localStorage.removeItem("token");
+			dispatch({
+				type: "AUTH_ERROR",
+			});
+			dispatch(showPopUp("Login Expired"));
+		} else {
+			dispatch(showPopUp(error.response.data.message));
+		}
 	}
 };
