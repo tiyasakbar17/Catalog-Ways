@@ -38,4 +38,7 @@ router.get("/order/user", jwtAuth(["customer"]), Order.getOrders);
 router.post("/order/add", jwtAuth(["customer"]), Order.newOrder);
 router.patch("/order/edit", jwtAuth(["customer"]), uploadFile("image"), Order.updateOrder);
 
+//** Admin */
+router.get("/data/all", jwtAuth(["admin"]), Cart.getAllData)
+
 module.exports = router;

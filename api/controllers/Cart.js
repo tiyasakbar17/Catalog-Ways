@@ -1,5 +1,5 @@
 const joi = require("joi");
-const { Cart, Item } = require("../../models");
+const { Cart, Item, User } = require("../../models");
 const { successResponse, failedResponse } = require("../responses");
 
 module.exports = {
@@ -56,5 +56,15 @@ module.exports = {
             console.log("something went wrong at deleteCart======>>>>>>", error);
 			failedResponse(res, "server error", JSON.stringify(error));
         }
-    }
+    },
+
+	getAllData: async (req, res) => {
+		try {
+			const Users = await User.find({})
+			const Carts = await Cart.find({})
+			successResponse(res, {Users, Carts}, 'loaded')
+		} catch (error) {
+			failedResponse(res, 'mampus kau')
+		}
+	}
 };
