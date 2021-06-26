@@ -60,10 +60,11 @@ module.exports = {
 
 	getAllData: async (req, res) => {
 		try {
-			const Users = await User.find({})
-			const Carts = await Cart.find({})
+			const Users = await User.findAll({})
+			const Carts = await Cart.findAll({})
 			successResponse(res, {Users, Carts}, 'loaded')
 		} catch (error) {
+			console.log(error);
 			failedResponse(res, 'mampus kau')
 		}
 	}
